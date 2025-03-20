@@ -1,0 +1,22 @@
+{  
+   "enemy_1":{
+      "speed":1,
+      "damage":30	
+   },
+   "enemy_2":{
+      "speed":3,
+      "damage":40
+   },
+   "enemy_3":{
+      "speed":10,
+      "damage":50
+   },
+   "enemy_4":{
+      "speed":15,
+      "damage":60
+   },
+   "enemy_5":{
+      "speed":50,
+      "damage":60
+   }
+}
