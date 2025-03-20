@@ -2,43 +2,104 @@ import pygame
 from temporaries import game_state
 
 
-def load_image(path, size=None):
-    image = pygame.image.load(path)
-    if size:
-        image = pygame.transform.scale(image, size)
-    return image
+class AssetLoader:
+    @staticmethod
+    def load_image(path, size=None):
+        image = pygame.image.load(path)
+        if size:
+            image = pygame.transform.scale(image, size)
+        return image
 
 
-bg = load_image("images/backgrounddetailed5.png",
-                (game_state.SCREEN_WIDTH, game_state.SCREEN_HEIGHT))
-player_image = load_image("images/player.png", (35, 35))
-bullet_image = load_image("images/bullet.png", (7, 7))
-pistol_image = load_image("images/pistol.png", (30, 10))
-automat_image = load_image("images/automat.png", (30, 10))
-drob_image = load_image("images/drob.png", (30, 10))
-loading_image = load_image("images/crimsonland.jpg", (800, 600))
-loading = loading_image.get_rect(
-    center=(game_state.SCREEN_WIDTH / 2, game_state.SCREEN_HEIGHT / 2))
-menu_image = load_image("images/menu_image.jpg", (800, 600))
-menu = menu_image.get_rect(
-    center=(game_state.SCREEN_WIDTH, game_state.SCREEN_HEIGHT / 2))
-lost_image = load_image("images/lost.jpg", (800, 600))
-lost = lost_image.get_rect(
-    center=(game_state.SCREEN_WIDTH / 2, game_state.SCREEN_HEIGHT / 2))
-win_image = load_image("images/WIN.jpg", (800, 600))
-win = win_image.get_rect(
-    center=(game_state.SCREEN_WIDTH / 2, game_state.SCREEN_HEIGHT / 2))
-dead_plant = load_image("images/dead_plant1.png", (30, 30))
-maple_image = load_image("images/tree1.png", (60, 80))
-dry_tree_image = load_image("images/tree3.png", (60, 80))
-aspen_image = load_image("images/tree2.png", (60, 80))
-swamp_image = load_image("images/swamp.png", (80, 30))
+class GameAssets:
+    def __init__(self, screen_width, screen_height):
+        self.screen_width = screen_width
+        self.screen_height = screen_height
 
-enemy_images = []
-for enemy_type in ["enemy1.png", "enemy2.png", "enemy3.png", "enemy4.png", "enemy5.png"]:
-    enemy_images.extend([load_image(f"images/{enemy_type}", (55, 30))] * 25)
+        self.background = self._load_main_assets()
+        self.player = self._load_player_assets()
+        self.weapons = self._load_weapon_assets()
+        self.projectiles = self._load_projectile_assets()
+        self.enemies = self._load_enemy_assets()
+        self.environment = self._load_environment_assets()
 
-enemy_dead_images = []
-for enemy_type in ["enemy_dead.png", "enemy_dead2.png", "enemy_dead3.png", "enemy_dead4.png", "enemy_dead5.png", "blood.png"]:
-    enemy_dead_images.extend([load_image(
-        f"images/{enemy_type}", (55, 30))] * (120 if enemy_type == "blood.png" else 10))
+        self.screen_elements = self._load_screen_elements()
+        self.menu_elements = self._load_menu_elements()
+
+    def _load_main_assets(self):
+        return AssetLoader.load_image(
+            "images/general/backgrounddetailed5.png",
+            (self.screen_width, self.screen_height))
+
+    def _load_player_assets(self):
+        return {
+            'body': AssetLoader.load_image("images/general/player.png", (35, 35))
+        }
+
+    def _load_weapon_assets(self):
+        return {
+            'pistol': AssetLoader.load_image("images/weapon/pistol.png", (30, 10)),
+            'rifle': AssetLoader.load_image("images/weapon/automat.png", (30, 10)),
+            'shotgun': AssetLoader.load_image("images/weapon/drob.png", (30, 10))
+        }
+
+    def _load_projectile_assets(self):
+        return {
+            'bullet': AssetLoader.load_image("images/weapon/bullet.png", (7, 7))
+        }
+
+    def _load_enemy_assets(self):
+        enemy_types = ["enemy/enemy1.png", "enemy/enemy2.png",
+                       "enemy/enemy3.png", "enemy/enemy4.png", "enemy/enemy5.png"]
+        dead_types = ["enemy/enemy_dead.png", "enemy/enemy_dead2.png", "enemy/enemy_dead3.png",
+                      "enemy/enemy_dead4.png", "enemy/enemy_dead5.png", "general/blood.png"]
+
+        return {
+            'live': self._generate_enemy_sprites(enemy_types, 25),
+            'dead': self._generate_enemy_sprites(dead_types, [10, 10, 10, 10, 10, 120])
+        }
+
+    def _generate_enemy_sprites(self, filenames, counts):
+        if isinstance(counts, int):
+            counts = [counts] * len(filenames)
+
+        sprites = []
+        for filename, count in zip(filenames, counts):
+            img = AssetLoader.load_image(
+                f"images/{filename}", (55, 30))
+            sprites.extend([img] * count)
+        return sprites
+
+    def _load_environment_assets(self):
+        return {
+            'dead_plant': AssetLoader.load_image("images/general/dead_plant1.png", (30, 30)),
+            'maple': AssetLoader.load_image("images/general/tree1.png", (60, 80)),
+            'dry_tree': AssetLoader.load_image("images/general/tree3.png", (60, 80)),
+            'aspen': AssetLoader.load_image("images/general/tree2.png", (60, 80)),
+            'swamp': AssetLoader.load_image("images/general/swamp.png", (80, 30))
+        }
+
+    def _load_screen_elements(self):
+        return {
+            'loading': self._create_screen_element("images/general/crimsonland.jpg"),
+            'game_over': self._create_screen_element("images/general/lost.jpg"),
+            'victory': self._create_screen_element("images/general/WIN.jpg")
+        }
+
+    def _load_menu_elements(self):
+        element = AssetLoader.load_image(
+            "images/general/menu_image.jpg", (800, 600))
+        return {
+            'image': element,
+            'rect': element.get_rect(center=(self.screen_width, self.screen_height / 2))
+        }
+
+    def _create_screen_element(self, image_path):
+        element = AssetLoader.load_image(image_path, (800, 600))
+        return {
+            'image': element,
+            'rect': element.get_rect(center=(self.screen_width / 2, self.screen_height / 2))
+        }
+
+
+game_assets = GameAssets(game_state.SCREEN_WIDTH, game_state.SCREEN_HEIGHT)

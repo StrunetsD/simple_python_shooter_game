@@ -1,9 +1,8 @@
 import math
 import pygame
 from pygame import rect
-
+from loading_images import game_assets
 from files import *
-from loading_images import player_image, automat_image, pistol_image, drob_image
 from temporaries import game_state
 from weapon import Rifle, Pistol, Shotgun
 
@@ -11,7 +10,7 @@ from weapon import Rifle, Pistol, Shotgun
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.original_image = player_image
+        self.original_image = game_assets.player['body']
         self.image = self.original_image
         self.rect = self.image.get_rect(
             center=(game_state.MAP_WIDTH // 2, game_state.MAP_HEIGHT // 2))
@@ -111,11 +110,11 @@ class Player(pygame.sprite.Sprite):
         self.weapon.rect.center = self.rect.center
 
         if type(self.weapon) == Rifle:
-            self.weapon.original_image = automat_image
+            self.weapon.original_image = game_assets.weapons['rifle']
         elif type(self.weapon) == Pistol:
-            self.weapon.original_image = pistol_image
+            self.weapon.original_image = game_assets.weapons['pistol']
         elif type(self.weapon) == Shotgun:
-            self.weapon.original_image = drob_image
+            self.weapon.original_image = game_assets.weapons['shotgun']
 
     def shoot(self):
         if self.weapon:

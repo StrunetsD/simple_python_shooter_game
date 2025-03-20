@@ -1,6 +1,6 @@
 import pygame
 from bullet import Bullet
-from loading_images import pistol_image, automat_image, drob_image
+from loading_images import game_assets
 from sounds import reload_sound, pistol_sound, rifle_sound, shotgun_sound
 from temporaries import game_state
 from files import *
@@ -63,7 +63,7 @@ class Pistol(Weapon):
     def __init__(self, position):
         super().__init__(
             position=position,
-            image=pistol_image,
+            image=game_assets.weapons['pistol'],
             max_ammo=weapon_stat["pistol"]["max_ammo"],
             reload_time=weapon_stat["pistol"]["reload_time"],
             speed=weapon_stat["pistol"]["speed"],
@@ -79,7 +79,7 @@ class Rifle(Weapon):
     def __init__(self, position):
         super().__init__(
             position=position,
-            image=automat_image,
+            image=game_assets.weapons['rifle'],
             max_ammo=weapon_stat["rifle"]["max_ammo"],
             reload_time=weapon_stat["rifle"]["reload_time"],
             speed=weapon_stat["rifle"]["speed"],
@@ -95,7 +95,7 @@ class Shotgun(Weapon):
     def __init__(self, position):
         super().__init__(
             position=position,
-            image=drob_image,
+            image=game_assets.weapons['shotgun'],
             max_ammo=weapon_stat["shotgun"]["max_ammo"],
             reload_time=weapon_stat["shotgun"]["reload_time"],
             speed=weapon_stat["shotgun"]["speed"],

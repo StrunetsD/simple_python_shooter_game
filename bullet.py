@@ -1,12 +1,12 @@
 import math
-from loading_images import bullet_image
+from loading_images import game_assets
 from temporaries import *
 
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, position, angle, speed, damage):
         super().__init__()
-        self.original_image = bullet_image
+        self.original_image = game_assets.projectiles['bullet']
         self.image = pygame.transform.rotate(
             self.original_image, -math.degrees(angle))
         self.rect = self.image.get_rect(center=position)

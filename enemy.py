@@ -1,14 +1,15 @@
 import math
 import pygame
 from files import *
-from loading_images import enemy_images, enemy_dead_images
 from sounds import hit_zombie_sound
 from temporaries import game_state
+from loading_images import game_assets
 
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, player, health, coordinates, speed, damage, images, dead_images):
         super().__init__()
+        self.enemy_images = game_assets.enemies['live']
         self.player = player
         self.image_number = 0
         self.speed = speed
@@ -94,8 +95,8 @@ class BasicEnemy(Enemy):
             player=game_state.player,
             health=health,
             coordinates=coordinates,
-            speed=enemy_stat["speed"],
-            damage=enemy_stat["damage"],
-            images=enemy_images,
-            dead_images=enemy_dead_images
+            speed=enemy_stat["enemy"]["speed"],
+            damage=enemy_stat["enemy"]["damage"],
+            images=game_assets.enemies['live'],
+            dead_images=game_assets.enemies['dead']
         )

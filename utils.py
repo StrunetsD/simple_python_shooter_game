@@ -2,7 +2,7 @@ import random
 import pygame
 from files import *
 from enemy import BasicEnemy
-from loading_images import bg, dead_plant, maple_image, dry_tree_image, aspen_image, swamp_image
+from loading_images import game_assets
 from plants import Dry_tree
 from player import Player
 from sounds import menu_sound, enemy_sound, dead_sound
@@ -10,6 +10,9 @@ from temporaries import game_state
 from weapon import Pistol, Rifle, Shotgun
 from plants import *
 from swap import Swamp
+
+bg = game_assets.background
+player_image = game_assets.player['body']
 
 
 def save_record():
@@ -176,7 +179,7 @@ def spawn_plant(plant_class, image, existing_rects, game_state, count=20):
                 center=(random_number_x, random_number_y))
             if not is_colliding(temp_rect, existing_rects):
                 plant = plant_class(x=random_number_x, y=random_number_y,
-                                    health=1000, image=image, dead_image=dead_plant)
+                                    health=1000, image=image, dead_image=game_assets.environment['dead_plant'])
                 game_state.plants.add(plant)
                 game_state.all_sprites.add(plant)
                 existing_rects.append(temp_rect)
@@ -201,7 +204,10 @@ def spawn_swamp(image, existing_rects, game_state, count=20):
 
 def spawn_plants():
     existing_rects = []
-    spawn_plant(Maple, maple_image, existing_rects, game_state)
-    spawn_plant(Dry_tree, dry_tree_image, existing_rects, game_state)
-    spawn_plant(Aspen, aspen_image, existing_rects, game_state)
-    spawn_swamp(swamp_image, existing_rects, game_state)
+    spawn_plant(
+        Maple, game_assets.environment['maple'], existing_rects, game_state)
+    spawn_plant(
+        Dry_tree, game_assets.environment['dry_tree'], existing_rects, game_state)
+    spawn_plant(
+        Aspen, game_assets.environment['aspen'], existing_rects, game_state)
+    spawn_swamp(game_assets.environment['swamp'], existing_rects, game_state)
