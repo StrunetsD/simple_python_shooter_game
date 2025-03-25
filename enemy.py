@@ -9,7 +9,7 @@ from loading_images import game_assets
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, player, health, coordinates, speed, damage, images, dead_images):
         super().__init__()
-        self.enemy_images = game_assets.enemies['live']
+        self.enemy_images = game_assets.enemy_one['live']
         self.player = player
         self.image_number = 0
         self.speed = speed
@@ -89,14 +89,66 @@ class Enemy(pygame.sprite.Sprite):
         return False
 
 
-class BasicEnemy(Enemy):
+class EnemyOne(Enemy):
     def __init__(self, health, coordinates):
         super().__init__(
             player=game_state.player,
             health=health,
             coordinates=coordinates,
-            speed=enemy_stat["enemy"]["speed"],
-            damage=enemy_stat["enemy"]["damage"],
-            images=game_assets.enemies['live'],
-            dead_images=game_assets.enemies['dead']
+            speed=enemy_data["enemy_one"]["speed"],
+            damage=enemy_data["enemy_one"]["damage"],
+            images=game_assets.enemy_one['live'],
+            dead_images=game_assets.enemy_one['dead']
+        )
+
+
+class EnemyTwo(Enemy):
+    def __init__(self, health, coordinates):
+        super().__init__(
+            player=game_state.player,
+            health=health,
+            coordinates=coordinates,
+            speed=enemy_data["enemy_two"]["speed"],
+            damage=enemy_data["enemy_two"]["damage"],
+            images=game_assets.enemy_two['live'],
+            dead_images=game_assets.enemy_two['dead']
+        )
+
+
+class EnemyThree(Enemy):
+    def __init__(self, health, coordinates):
+        super().__init__(
+            player=game_state.player,
+            health=health,
+            coordinates=coordinates,
+            speed=enemy_data["enemy_three"]["speed"],
+            damage=enemy_data["enemy_three"]["damage"],
+            images=game_assets.enemy_three['live'],
+            dead_images=game_assets.enemy_three['dead']
+        )
+
+
+class EnemyFour(Enemy):
+    def __init__(self, health, coordinates):
+        super().__init__(
+            player=game_state.player,
+            health=health,
+            coordinates=coordinates,
+            speed=enemy_data["enemy_four"]["speed"],
+            damage=enemy_data["enemy_four"]["damage"],
+            images=game_assets.enemy_four['live'],
+            dead_images=game_assets.enemy_four['dead']
+        )
+
+
+class EnemyFive(Enemy):
+    def __init__(self, health, coordinates):
+        super().__init__(
+            player=game_state.player,
+            health=health,
+            coordinates=coordinates,
+            speed=enemy_data["enemy_five"]["speed"],
+            damage=enemy_data["enemy_five"]["damage"],
+            images=game_assets.enemy_five['live'],
+            dead_images=game_assets.enemy_five['dead']
         )

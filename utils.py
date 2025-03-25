@@ -1,7 +1,7 @@
 import random
 import pygame
 from files import *
-from enemy import BasicEnemy
+from enemy import *
 from loading_images import game_assets
 from plants import Dry_tree
 from player import Player
@@ -155,12 +155,36 @@ def reload_weapon():
 
 def spawn_enemy():
     for j in range(waves[game_state.wave_num]["enemies"]):
-        enemy = BasicEnemy(waves[game_state.wave_num]["health"], (
+        enemy_one = EnemyOne(waves[game_state.wave_num]["health"], (
             random.randint(0, game_state.SCREEN_WIDTH * 3),
             random.randint(0, game_state.SCREEN_HEIGHT * 3)
         ))
-        game_state.all_sprites.add(enemy)
-        game_state.enemies.add(enemy)
+        enemy_two = EnemyTwo(waves[game_state.wave_num]["health"], (
+            random.randint(0, game_state.SCREEN_WIDTH * 3),
+            random.randint(0, game_state.SCREEN_HEIGHT * 3)
+        ))
+        enemy_three = EnemyThree(waves[game_state.wave_num]["health"], (
+            random.randint(0, game_state.SCREEN_WIDTH * 3),
+            random.randint(0, game_state.SCREEN_HEIGHT * 3)
+        ))
+        enemy_four = EnemyFour(waves[game_state.wave_num]["health"], (
+            random.randint(0, game_state.SCREEN_WIDTH * 3),
+            random.randint(0, game_state.SCREEN_HEIGHT * 3)
+        ))
+        enemy_five = EnemyFive(waves[game_state.wave_num]["health"], (
+            random.randint(0, game_state.SCREEN_WIDTH * 3),
+            random.randint(0, game_state.SCREEN_HEIGHT * 3)
+        ))
+        game_state.all_sprites.add(enemy_one)
+        game_state.enemies.add(enemy_one)
+        game_state.all_sprites.add(enemy_two)
+        game_state.enemies.add(enemy_two)
+        game_state.all_sprites.add(enemy_three)
+        game_state.enemies.add(enemy_three)
+        game_state.all_sprites.add(enemy_four)
+        game_state.enemies.add(enemy_four)
+        game_state.all_sprites.add(enemy_five)
+        game_state.enemies.add(enemy_five)
 
 
 def is_colliding(new_rect, existing_rects):

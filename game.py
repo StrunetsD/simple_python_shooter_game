@@ -8,7 +8,7 @@ from loading_images import game_assets
 import pygame
 from plants import Maple
 from player import Player
-from enemy import BasicEnemy
+from enemy import *
 from bullet import Bullet
 from swap import Swamp
 from plants import Plant, Maple, Dry_tree, Aspen
@@ -33,7 +33,7 @@ class GameManager:
 
         self.running = True
         self.clock = pygame.time.Clock()
-        self.enemy_images = game_assets.enemies['live']
+        self.enemy_images = game_assets.enemy_one['live']
 
         # Initialize player
         game_state.player = Player()
@@ -257,5 +257,3 @@ class GameManager:
                     game_state.LOST = False
                     game_state.WIN = False
                     game_state.MENU = True
-
-

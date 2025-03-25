@@ -20,7 +20,11 @@ class GameAssets:
         self.player = self._load_player_assets()
         self.weapons = self._load_weapon_assets()
         self.projectiles = self._load_projectile_assets()
-        self.enemies = self._load_enemy_assets()
+        self.enemy_one = self._load_enemy_assets()
+        self.enemy_two = self._load_enemy_assets_two()
+        self.enemy_three = self._load_enemy_assets_three()
+        self.enemy_four = self._load_enemy_assets_four()
+        self.enemy_five = self._load_enemy_assets_five()
         self.environment = self._load_environment_assets()
 
         self.screen_elements = self._load_screen_elements()
@@ -49,14 +53,58 @@ class GameAssets:
         }
 
     def _load_enemy_assets(self):
-        enemy_types = ["enemy/enemy1.png", "enemy/enemy2.png",
-                       "enemy/enemy3.png", "enemy/enemy4.png", "enemy/enemy5.png"]
-        dead_types = ["enemy/enemy_dead.png", "enemy/enemy_dead2.png", "enemy/enemy_dead3.png",
-                      "enemy/enemy_dead4.png", "enemy/enemy_dead5.png", "general/blood.png"]
+        enemy_types_1 = ["enemy/enemy1.png", "enemy/enemy2.png",
+                         "enemy/enemy3.png", "enemy/enemy4.png", "enemy/enemy5.png"]
+        dead_types_1 = ["enemy/enemy_dead.png", "enemy/enemy_dead2.png", "enemy/enemy_dead3.png",
+                        "enemy/enemy_dead4.png", "enemy/enemy_dead5.png", "general/blood.png"]
 
         return {
-            'live': self._generate_enemy_sprites(enemy_types, 25),
-            'dead': self._generate_enemy_sprites(dead_types, [10, 10, 10, 10, 10, 120])
+            'live': self._generate_enemy_sprites(enemy_types_1, 25),
+            'dead': self._generate_enemy_sprites(dead_types_1, [10, 10, 10, 10, 10, 120])
+        }
+
+    def _load_enemy_assets_two(self):
+
+        enemy_types_2 = ["enemy_two/enemy1.png", "enemy_two/enemy2.png",
+                         "enemy_two/enemy3.png", "enemy_two/enemy4.png", "enemy_two/enemy5.png"]
+        dead_types_2 = ["enemy_two/enemy_dead.png", "enemy_two/enemy_dead2.png", "enemy_two/enemy_dead3.png",
+                        "enemy_two/enemy_dead4.png", "enemy_two/enemy_dead5.png", "general/blood.png"]
+        return {
+            'live': self._generate_enemy_sprites(enemy_types_2, 25),
+            'dead': self._generate_enemy_sprites(dead_types_2, [10, 10, 10, 10, 10, 120])
+        }
+
+    def _load_enemy_assets_three(self):
+
+        enemy_types_3 = ["enemy_three/enemy1.png", "enemy_three/enemy2.png",
+                         "enemy_three/enemy3.png", "enemy_three/enemy4.png", "enemy_three/enemy5.png"]
+        dead_types_3 = ["enemy_three/enemy_dead.png", "enemy_three/enemy_dead2.png", "enemy_three/enemy_dead3.png",
+                        "enemy_three/enemy_dead4.png", "enemy_three/enemy_dead5.png", "general/blood.png"]
+        return {
+            'live': self._generate_enemy_sprites(enemy_types_3, 25),
+            'dead': self._generate_enemy_sprites(dead_types_3, [10, 10, 10, 10, 10, 120])
+        }
+
+    def _load_enemy_assets_four(self):
+
+        enemy_types_4 = ["enemy_four/enemy1.png", "enemy_four/enemy2.png",
+                         "enemy_four/enemy3.png", "enemy_four/enemy4.png", "enemy_four/enemy5.png"]
+        dead_types_4 = ["enemy_four/enemy_dead.png", "enemy_four/enemy_dead2.png", "enemy_four/enemy_dead3.png",
+                        "enemy_four/enemy_dead4.png", "enemy_four/enemy_dead5.png", "general/blood.png"]
+        return {
+            'live': self._generate_enemy_sprites(enemy_types_4, 25),
+            'dead': self._generate_enemy_sprites(dead_types_4, [10, 10, 10, 10, 10, 120])
+        }
+
+    def _load_enemy_assets_five(self):
+
+        enemy_types_5 = ["enemy_five/enemy1.png", "enemy_five/enemy2.png",
+                         "enemy_five/enemy3.png", "enemy_five/enemy4.png", "enemy_five/enemy5.png"]
+        dead_types_5 = ["enemy_five/enemy_dead.png", "enemy_five/enemy_dead2.png", "enemy_five/enemy_dead3.png",
+                        "enemy_five/enemy_dead4.png", "enemy_five/enemy_dead5.png", "general/blood.png"]
+        return {
+            'live': self._generate_enemy_sprites(enemy_types_5, 25),
+            'dead': self._generate_enemy_sprites(dead_types_5, [10, 10, 10, 10, 10, 120])
         }
 
     def _generate_enemy_sprites(self, filenames, counts):

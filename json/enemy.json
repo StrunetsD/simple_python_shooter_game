@@ -1,8 +1,27 @@
 {  
-   "enemy":
+   "enemy_one":
       {
          "speed":1,
          "damage":30	
+      },
+   "enemy_two":
+      {
+         "speed":1,
+         "damage":50
+      },
+   "enemy_three":
+      {
+         "speed":2,
+         "damage":50
+      },
+   "enemy_four":
+   {
+      "speed":2,
+      "damage":50
+   },
+   "enemy_five":
+      {
+         "speed":2,
+         "damage":50
       }
-
 }
