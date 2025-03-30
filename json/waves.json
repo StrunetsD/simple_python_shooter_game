@@ -1,24 +1,84 @@
 {
     "waves": [
-        {"health": 100, "enemies": 2, "seconds": 10},
-        {"health": 100, "enemies": 3, "seconds": 10},
-        {"health": 100, "enemies": 4, "seconds": 15},
-        {"health": 125, "enemies": 4, "seconds": 15},
-        {"health": 125, "enemies": 4, "seconds": 20},
-        {"health": 125, "enemies": 5, "seconds": 20},
-        {"health": 150, "enemies": 5, "seconds": 20},
-        {"health": 150, "enemies": 5, "seconds": 25},
-        {"health": 150, "enemies": 6, "seconds": 25},
-        {"health": 200, "enemies": 6, "seconds": 25},
-        {"health": 200, "enemies": 6, "seconds": 30},
-        {"health": 200, "enemies": 7, "seconds": 30},
-        {"health": 200, "enemies": 7, "seconds": 30},
-        {"health": 200, "enemies": 7, "seconds": 35},
-        {"health": 200, "enemies": 7, "seconds": 39},
-        {"health": 300, "enemies": 7, "seconds": 39},
-        {"health": 300, "enemies": 7, "seconds": 45},
-        {"health": 300, "enemies": 8, "seconds": 45},
-        {"health": 400, "enemies": 8, "seconds": 50},
-        {"health": 400, "enemies": 10, "seconds": 50}
+        {
+            "enemy_types": {"EnemyOne": 2},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyTwo": 3},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyThree": 2, "EnemyTwo": 1},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyFour": 1, "EnemyTwo": 2},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyFive": 3},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyTwo": 2, "EnemyThree": 1},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyTwo": 1, "EnemyThree": 2},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyThree": 3},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyThree": 2, "EnemyFour": 1},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyThree": 1, "EnemyFour": 2},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyFour": 2, "EnemyFive": 1},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyFour": 1, "EnemyFive": 2},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyFive": 3},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyThree": 1, "EnemyFive": 3},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyFour": 1, "EnemyFive": 3},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyTwo": 1, "EnemyFour": 1, "EnemyFive": 2},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyOne": 1, "EnemyThree": 1, "EnemyFive": 2},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyFour": 2, "EnemyFive": 3},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyThree": 2, "EnemyFive": 3},
+            "seconds": 5
+        },
+        {
+            "enemy_types": {"EnemyOne": 1, "EnemyTwo": 1, "EnemyThree": 1, "EnemyFour": 1, "EnemyFive": 1},
+            "seconds": 5
+        }
     ]
 }

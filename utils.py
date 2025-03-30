@@ -70,6 +70,8 @@ def game_start():
     pistol = Pistol((1200, 900))
     game_state.weapons.add(pistol)
     game_state.all_sprites.add(pistol)
+    game_state.wave_num = 0
+    spawn_enemy()
 
 
 def game_end():
@@ -103,6 +105,13 @@ def draw():
 
 
 def check_collides():
+    hits = pygame.sprite.spritecollide(
+        game_state.player,
+        game_state.enemy_bullets,
+        True
+    )
+    for bullet in hits:
+        game_state.player.health -= bullet.damage
     for weapon in game_state.weapons:
         if pygame.sprite.collide_rect(game_state.player, weapon):
             game_state.player.equip_weapon(weapon)
@@ -154,37 +163,33 @@ def reload_weapon():
 
 
 def spawn_enemy():
-    for j in range(waves[game_state.wave_num]["enemies"]):
-        enemy_one = EnemyOne(waves[game_state.wave_num]["health"], (
-            random.randint(0, game_state.SCREEN_WIDTH * 3),
-            random.randint(0, game_state.SCREEN_HEIGHT * 3)
-        ))
-        enemy_two = EnemyTwo(waves[game_state.wave_num]["health"], (
-            random.randint(0, game_state.SCREEN_WIDTH * 3),
-            random.randint(0, game_state.SCREEN_HEIGHT * 3)
-        ))
-        enemy_three = EnemyThree(waves[game_state.wave_num]["health"], (
-            random.randint(0, game_state.SCREEN_WIDTH * 3),
-            random.randint(0, game_state.SCREEN_HEIGHT * 3)
-        ))
-        enemy_four = EnemyFour(waves[game_state.wave_num]["health"], (
-            random.randint(0, game_state.SCREEN_WIDTH * 3),
-            random.randint(0, game_state.SCREEN_HEIGHT * 3)
-        ))
-        enemy_five = EnemyFive(waves[game_state.wave_num]["health"], (
-            random.randint(0, game_state.SCREEN_WIDTH * 3),
-            random.randint(0, game_state.SCREEN_HEIGHT * 3)
-        ))
-        game_state.all_sprites.add(enemy_one)
-        game_state.enemies.add(enemy_one)
-        game_state.all_sprites.add(enemy_two)
-        game_state.enemies.add(enemy_two)
-        game_state.all_sprites.add(enemy_three)
-        game_state.enemies.add(enemy_three)
-        game_state.all_sprites.add(enemy_four)
-        game_state.enemies.add(enemy_four)
-        game_state.all_sprites.add(enemy_five)
-        game_state.enemies.add(enemy_five)
+    current_wave = waves[game_state.wave_num]
+
+    for enemy_class, count in current_wave["enemy_types"].items():
+        json_key = enemy_class.lower().replace("enemy", "enemy_")
+
+        for _ in range(count):
+            side = random.choice(["top", "bottom", "left", "right"])
+            if side == "top":
+                x = random.randint(0, game_state.MAP_WIDTH)
+                y = 0
+            elif side == "bottom":
+                x = random.randint(0, game_state.MAP_WIDTH)
+                y = game_state.MAP_HEIGHT
+            elif side == "left":
+                x = 0
+                y = random.randint(0, game_state.MAP_HEIGHT)
+            else:
+                x = game_state.MAP_WIDTH
+                y = random.randint(0, game_state.MAP_HEIGHT)
+
+            enemy = globals()[enemy_class](
+                health=enemy_data[json_key]["health"],
+                coordinates=(x, y)
+            )
+
+            game_state.enemies.add(enemy)
+            game_state.all_sprites.add(enemy)
 
 
 def is_colliding(new_rect, existing_rects):

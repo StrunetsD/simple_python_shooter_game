@@ -2,26 +2,37 @@
    "enemy_one":
       {
          "speed":1,
-         "damage":30	
+         "damage":30,
+         "health": 100
       },
    "enemy_two":
       {
          "speed":1,
-         "damage":50
+         "damage":50,
+         "health": 100
       },
    "enemy_three":
       {
          "speed":2,
-         "damage":50
+         "damage":50,
+         "health": 100
       },
-   "enemy_four":
-   {
-      "speed":2,
-      "damage":50
+   "enemy_four": {
+      "health": 100,
+      "stop_distance": 200,
+      "speed": 2,
+      "damage": 50,
+      "bullet_speed": 5,
+      "bullet_damage": 20,
+      "shoot_cooldown": 2000
    },
-   "enemy_five":
-      {
-         "speed":2,
-         "damage":50
-      }
+   "enemy_five": {
+      "health": 100,
+      "stop_distance": 200,
+      "speed": 2,
+      "damage": 50,
+      "bullet_speed": 5,
+      "bullet_damage": 20,
+      "shoot_cooldown": 2000
+   }
 }

@@ -20,5 +20,3 @@ with open("json/player.json", "r", encoding="utf-8") as file:
 with open("json/weapon.json", "r", encoding="utf-8") as file:
     weapon_stat = json.load(file)
 
-print("Enemy One Speed:", enemy_one['speed'])
-print("Enemy Three Damage:", enemy_three['damage'])

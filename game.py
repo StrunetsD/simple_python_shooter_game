@@ -34,7 +34,7 @@ class GameManager:
         self.running = True
         self.clock = pygame.time.Clock()
         self.enemy_images = game_assets.enemy_one['live']
-
+        self.enemy_bullets = pygame.sprite.Group()
         # Initialize player
         game_state.player = Player()
         game_state.all_sprites.add(game_state.player)
@@ -84,17 +84,19 @@ class GameManager:
                 if game_state.player.weapon:
                     reload_weapon()
             elif event.type == game_state.TIMER_EVENT:
-                if game_state.timer_active and current_time - game_state.start_time <= waves[game_state.wave_num]["seconds"] * 1000:
-                    spawn_enemy()
-                elif game_state.timer_active and current_time - game_state.start_time >= waves[game_state.wave_num]["seconds"] * 1000:
-                    if len(game_state.enemies) <= 0:
+                if game_state.timer_active:
+                    current_wave = waves[game_state.wave_num]
+                    current_enemies = len(game_state.enemies)
+
+                    if current_enemies == 0:
                         game_state.wave_num += 1
-                        if game_state.wave_num == 20:
+                        if game_state.wave_num >= len(waves):
                             game_state.WIN = True
                             game_end()
-                        stop_timer()
-            elif event.type == game_state.TIMER_START_EVENT:
-                start_timer(3000)
+                        else:
+                            spawn_enemy()
+                            stop_timer()
+                            start_timer(1000)
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     game_state.player.weapon.reload()
@@ -102,11 +104,23 @@ class GameManager:
                     perk = Perk()
                     perk.update()
 
+        current_wave = waves[game_state.wave_num]
+        current_enemies = len(game_state.enemies)
+
+        if current_enemies == 0 and not game_state.WIN:
+            game_state.wave_num += 1
+            if game_state.wave_num >= len(waves):
+                game_state.WIN = True
+                game_end()
+            else:
+                spawn_enemy()
+                stop_timer()
+                start_timer(1000)
+
         if len(game_state.enemies) == 0:
             enemy_sound.stop()
-        elif len(game_state.enemies) > 0:
-            if not enemy_sound.get_num_channels():
-                enemy_sound.play(-1)
+        elif len(game_state.enemies) > 0 and not enemy_sound.get_num_channels():
+            enemy_sound.play(-1)
 
         if pygame.mouse.get_pressed()[0]:
             if game_state.player.weapon.reloading:
@@ -118,17 +132,21 @@ class GameManager:
         draw()
         check_collides()
         game_state.all_sprites.update()
+        game_state.enemy_bullets.update()
 
         if game_state.player.weapon:
             font = pygame.font.SysFont("Arial", 24)
             ammo_text = font.render(
-                f"Ammo: {game_state.player.weapon.ammo}/{game_state.player.weapon.max_ammo}", True, (255, 255, 255))
+                f"Ammo: {game_state.player.weapon.ammo}/{game_state.player.weapon.max_ammo}",
+                True, (255, 255, 255))
             health_text = font.render(
                 f"Health: {game_state.player.health}", True, (255, 255, 255))
             wave_text = font.render(
                 f"Wave: {game_state.wave_num + 1}", True, (255, 255, 255))
             perk_text = font.render(
-                f"Perk: {'ready' if game_state.player.perk_ready else 'not ready'}", True, (255, 255, 255))
+                f"Perk: {'ready' if game_state.player.perk_ready else 'not ready'}",
+                True, (255, 255, 255))
+
             game_state.screen.blit(ammo_text, (10, 10))
             game_state.screen.blit(health_text, (170, 10))
             game_state.screen.blit(wave_text, (310, 10))

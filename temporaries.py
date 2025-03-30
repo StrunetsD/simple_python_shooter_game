@@ -40,6 +40,7 @@ class GameState:
         self.time_game = 0
         self.start_game = 0
         self.enemies_killed = 0
+        self.enemy_bullets = pygame.sprite.Group()
 
 
 game_state = GameState()
