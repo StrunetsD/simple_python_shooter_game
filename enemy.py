@@ -162,9 +162,13 @@ class EnemyFour(Enemy):
         self.stop_distance = enemy_data["enemy_four"]["stop_distance"]
 
     def shoot(self):
+        bullet_position = self.rect.center
+
+        angle_rad = math.radians(-self.angle)
+
         bullet = Bullet(
-            position=self.rect.center,
-            angle=math.radians(self.angle),
+            position=bullet_position,
+            angle=angle_rad,
             speed=self.bullet_speed,
             damage=self.bullet_damage
         )
@@ -202,11 +206,14 @@ class EnemyFive(Enemy):
         )
         self.stop_distance = enemy_data["enemy_five"]["stop_distance"]
 
-
     def shoot(self):
+        bullet_position = self.rect.center
+
+        angle_rad = math.radians(-self.angle)
+
         bullet = Bullet(
-            position=self.rect.center,
-            angle=math.radians(self.angle),
+            position=bullet_position,
+            angle=angle_rad,  # Передаем угол в радианах
             speed=self.bullet_speed,
             damage=self.bullet_damage
         )

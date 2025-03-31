@@ -105,11 +105,21 @@ def draw():
 
 
 def check_collides():
-    hits = pygame.sprite.spritecollide(
-        game_state.player,
-        game_state.enemy_bullets,
-        True
-    )
+    hits = pygame.sprite.spritecollide(game_state.player, game_state.enemy_bullets, True)
+    for bullet in hits:
+        game_state.player.health -= bullet.damage
+        if game_state.player.health <= 0:
+            game_state.LOST = True
+            dead_sound.play()
+            game_end()
+
+    for enemy in game_state.enemies:
+        if enemy.rect.colliderect(game_state.player.rect) and enemy.health > 0:
+            enemy.hit_player()
+            if game_state.player.health <= 0:
+                game_state.LOST = True
+                dead_sound.play()
+                game_end()
     for bullet in hits:
         game_state.player.health -= bullet.damage
     for weapon in game_state.weapons:
