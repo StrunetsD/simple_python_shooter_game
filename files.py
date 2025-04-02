@@ -2,8 +2,8 @@ import json
 from glom import glom
 
 with open("json/waves.json", "r", encoding="utf-8") as file:
-    data = json.load(file)
-    waves = data["waves"]
+    data_waves = json.load(file)
+    waves = glom(data_waves, "waves")
 
 with open("json/enemy.json", "r", encoding="utf-8") as file:
     enemy_data = json.load(file)

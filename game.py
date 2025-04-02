@@ -1,17 +1,10 @@
-from utils import reload_weapon, spawn_enemy, game_end, stop_timer, start_timer, draw, check_collides, load_record, game_start
-from temporaries import game_state
-from sounds import enemy_sound, menu_sound, dryfir_sound
-from perk import Perk
-from fonts import font_lose, font_menu, font_win, font
-from files import waves
-from loading_images import game_assets
-import pygame
-from plants import Maple
-from player import Player
 from enemy import *
-from bullet import Bullet
-from swap import Swamp
-from plants import Plant, Maple, Dry_tree, Aspen
+from fonts import font_lose, font_menu, font_win, font
+from perk import Perk
+from player import Player
+from sounds import enemy_sound, menu_sound, dryfir_sound
+from utils import reload_weapon, spawn_enemy, game_end, stop_timer, start_timer, draw, check_collides, load_record, \
+    game_start
 
 TEXT = [
     "At the beginning of the game, the player appears",

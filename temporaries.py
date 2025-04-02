@@ -3,7 +3,6 @@ import pygame
 
 class GameState:
     def __init__(self):
-
         self.SCREEN_WIDTH = 800
         self.SCREEN_HEIGHT = 600
         self.screen = pygame.display.set_mode(

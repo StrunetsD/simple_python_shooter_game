@@ -1,8 +1,9 @@
 import math
+
 import pygame
-from pygame import rect
-from loading_images import game_assets
+
 from files import *
+from loading_images import game_assets
 from temporaries import game_state
 from weapon import Rifle, Pistol, Shotgun
 

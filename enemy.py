@@ -1,10 +1,12 @@
 import math
+
 import pygame
+
+from bullet import Bullet
 from files import *
+from loading_images import game_assets
 from sounds import hit_zombie_sound
 from temporaries import game_state
-from loading_images import game_assets
-from bullet import Bullet
 
 
 class Enemy(pygame.sprite.Sprite):

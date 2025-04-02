@@ -1,9 +1,10 @@
 import pygame
+
 from bullet import Bullet
+from files import *
 from loading_images import game_assets
 from sounds import reload_sound, pistol_sound, rifle_sound, shotgun_sound
 from temporaries import game_state
-from files import *
 
 
 class Weapon(pygame.sprite.Sprite):

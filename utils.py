@@ -1,15 +1,13 @@
 import random
-import pygame
-from files import *
+
 from enemy import *
 from loading_images import game_assets
-from plants import Dry_tree
+from plants import *
 from player import Player
 from sounds import menu_sound, enemy_sound, dead_sound
+from swap import Swamp
 from temporaries import game_state
 from weapon import Pistol, Rifle, Shotgun
-from plants import *
-from swap import Swamp
 
 bg = game_assets.background
 player_image = game_assets.player['body']
@@ -20,11 +18,11 @@ def save_record():
         existing_data = json.load(file)
         existing_data["seconds"].append(game_state.time_game)
         existing_data["kills"] = game_state.enemies_killed + \
-            existing_data["kills"]
+                                 existing_data["kills"]
         if game_state.time_game > existing_data["max_time"]:
             existing_data["max_time"] = game_state.time_game
         average_time = sum(existing_data["seconds"]) / \
-            len(existing_data["seconds"])
+                       len(existing_data["seconds"])
         existing_data["average_time"] = round(average_time, 2)
         file.seek(0)
         json.dump(existing_data, file, ensure_ascii=False, indent=4)
@@ -101,7 +99,7 @@ def draw():
             ))
     for sprite in game_state.all_sprites:
         game_state.screen.blit(sprite.image, (sprite.rect.x -
-                               game_state.camera_x, sprite.rect.y - game_state.camera_y))
+                                              game_state.camera_x, sprite.rect.y - game_state.camera_y))
 
 
 def check_collides():
@@ -129,7 +127,8 @@ def check_collides():
 
     if game_state.player in game_state.all_sprites:
         for enemy in game_state.enemies:
-            if game_state.player.rect.collidepoint(enemy.rect.center) and game_state.player.health > 0 and enemy.health > 0:
+            if game_state.player.rect.collidepoint(
+                    enemy.rect.center) and game_state.player.health > 0 and enemy.health > 0:
                 enemy.hit_player()
                 if game_state.player.health <= 0:
                     game_state.LOST = True
